@@ -2,11 +2,11 @@
 
 # LOAD COMMON LIB 
 import sys 
-sys.path.append('lib/core')
-import glastcore
+sys.path.append('lib/glas')
+import glascore
 
 # 공통 라이브러리 실행
-gc = glastcore.gcore()
+gc = glascore.gcore()
 
 # 데이타베이스 연결 예제
 con = gc.mysqlcon()
