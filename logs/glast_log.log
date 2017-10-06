@@ -1,0 +1,24 @@
+2017-10-04 01:56:19,223 [INFO] glastcore.py:52  > db connect success
+2017-10-04 01:56:19,223 [INFO] test.py:14  > mysql connectcon
+2017-10-04 01:56:19,224 [CRITICAL] test.py:15  > Critical example
+2017-10-04 01:56:19,224 [DEBUG] test.py:16  > debug example
+2017-10-04 01:56:19,224 [ERROR] test.py:17  > error example
+2017-10-04 01:56:19,224 [WARNING] test.py:18  > warning example
+2017-10-06 15:47:22,883 [INFO] glastcore.py:52  > db connect success
+2017-10-06 15:47:22,884 [INFO] test.py:16  > mysql connectcon
+2017-10-06 15:47:22,884 [CRITICAL] test.py:17  > Critical example
+2017-10-06 15:47:22,884 [DEBUG] test.py:18  > debug example
+2017-10-06 15:47:22,884 [ERROR] test.py:19  > error example
+2017-10-06 15:47:22,884 [WARNING] test.py:20  > warning example
+2017-10-06 15:49:38,728 [INFO] glastcore.py:52  > db connect success
+2017-10-06 15:49:38,728 [INFO] test.py:16  > mysql connectcon
+2017-10-06 15:49:38,728 [CRITICAL] test.py:17  > Critical example
+2017-10-06 15:49:38,729 [DEBUG] test.py:18  > debug example
+2017-10-06 15:49:38,729 [ERROR] test.py:19  > error example
+2017-10-06 15:49:38,729 [WARNING] test.py:20  > warning example
+2017-10-06 15:53:07,422 [INFO] glastcore.py:52  > db connect success
+2017-10-06 15:53:07,422 [INFO] test.py:16  > mysql connectcon
+2017-10-06 15:53:07,422 [CRITICAL] test.py:17  > Critical example
+2017-10-06 15:53:07,422 [DEBUG] test.py:18  > debug example
+2017-10-06 15:53:07,422 [ERROR] test.py:19  > error example
+2017-10-06 15:53:07,422 [WARNING] test.py:20  > warning example
