@@ -1,0 +1,25 @@
+The following are a listing of commands:
+----------------------------------------
+
+
+#Command to test the mapper
+cat Data/*/*/*/* | python LogParserMapper.py
+
+#Command to test the mapper and reducer
+cat Data/*/*/*/* | python LogParserMapper.py | sort | python LogParserReducer.py | sort
+
+#Command to load application to hdfs
+hadoop fs -put oozieProject/pythonApplication/ oozieProject/
+
+#Command to run on cluster
+hadoop jar <<path to hadoop streaming jar>> -D mapred.reduce.tasks=<<num tasks>>  -file <<path to mapper script>>  -mapper <<mapper file>>  -file <<path to reducer script>>  -reducer <<reducer script name>>    -input <<input directory>> -output <<output directory>>
+
+#Sample command
+hadoop jar /opt/cloudera/parcels/CDH-4.2.0-1.cdh4.2.0.p0.10/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming-2.0.0-mr1-cdh4.2.0.jar  -D mapred.reduce.tasks=1  -file oozieProject/pythonApplication/LogParserMapper.py  -mapper oozieProject/pythonApplication/LogParserMapper.py  -file oozieProject/pythonApplication/LogParserReducer.py  -reducer oozieProject/pythonApplication/LogParserReducer.py    -input oozieProject/pythonApplication/Data/*/*/*/* -output oozieProject/pythonApplication/output-streaming
+
+#View output
+$ hadoop fs -cat oozieProject/pythonApplication/output-streaming/part-00000 
+
+
+
+fsdfdsf
