@@ -32,7 +32,7 @@ for strLineRead in sys.stdin:
 
     if parsed_log:
         s = parsed_log.group(1)+"-"+parsed_log.group(2)+"-"+parsed_log.group(3)+"-"+parsed_log.group(4)+"-"+parsed_log.group(5)
-        print ('%s\t%s\t%s' % (s, parsed_log.group(6), "1"))
+        print ('%s\t%s' % (parsed_log.group(1)+"-"+parsed_log.group(6), "1"))
     else:
         print ('%s' % (strLineRead));
         print ("none")
