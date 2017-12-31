@@ -19,7 +19,11 @@ for line in sys.stdin:
     line = line.strip()
 
     # Parse the input from the mapper
-    event, count = line.split('\t', 1)
+    try:
+        event, count = line.split('\t', 1)
+    except ValueError:
+        pass
+
     # Cast count to int
     try:
         count = int(count)

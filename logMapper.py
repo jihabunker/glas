@@ -1,8 +1,7 @@
-
-import sys as sys
-import re as re
-import os as os
-
+import sys
+import re
+import os
+import codecs
 
 # -- syslog pattern --#
 data_pattern = r"(\w+)\s+(\d+)\s+(\d+:\d+:\d+)\s+(\w+\W*\w*)\s+(.*?\:)\s+(.*$)"
@@ -30,7 +29,8 @@ for strLineRead in sys.stdin:
 
     if parsed_log:
         s = parsed_log.group(1)+"-"+parsed_log.group(2)+"-"+parsed_log.group(3)+"-"+parsed_log.group(4)+"-"+parsed_log.group(5)
-        print ('{0}\t{1}'.format(parsed_log.group(1)+"-"+parsed_log.group(6), "1"))
+        if parsed_log.group(6) != '':
+            print ('{0}\t{1}'.format(parsed_log.group(1)+"-"+parsed_log.group(6), "1"))
     else:
         print ('%s' % (strLineRead));
         print ("none")
