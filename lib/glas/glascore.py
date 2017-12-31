@@ -7,7 +7,7 @@ import string as string
 import sys as sys
 
 GLASHOME = os.environ['GLAS_HOME']
-logconfigfile = GLASHOME+'/conf/glas.conf'
+CFG_FILE= GLASHOME+'/conf/glas.conf'
 
 
 class gcore:
@@ -23,7 +23,7 @@ class gcore:
     loggerstream = 0
     def __init__(self):
         cfg = CP.ConfigParser()
-        cfg.read(logconfigfile)
+        cfg.read(CFG_FILE)
         self.CFG_DBHOST = cfg.get('DB','hostname')
         self.CFG_DBUSER = cfg.get('DB','username')
         self.CFG_DBPASS = cfg.get('DB','password')
@@ -48,7 +48,7 @@ class gcore:
         #print (self.CFG_DBPASS)
         #print (self.CFG_DBNAME)
         try:
-            self.dbcon = mc.connect(host=self.CFG_DBHOST, user=self.CFG_DBUSER, passwd=self.CFG_DBPASS, db=self.CFG_DBNAME)
+            self.dbcon = mc.connect(host=self.CFG_DBHOST, user=self.CFG_DBUSER, passwd=self.CFG_DBPASS, db=self.CFG_DBNAME, charset='utf8')
             self.logger.info('db connect success')
         except mc.Error as e:
             self.logger.critical(e.args[1])

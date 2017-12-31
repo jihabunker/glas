@@ -1,11 +1,22 @@
-
+# -*- coding: utf-8 -*-
 import sys
+
+from time import strftime, localtime
+sys.path.append('lib/glas')
+
+# -- Glas modules --
+import glascore
+
+curYear = strftime("%Y", localtime())
 eventCountArray = {}
+
+gc = glascore.gcore()
+dbcon = gc.mysqlcon()
 
 # Input is from STDIN
 for line in sys.stdin:
     # Remove leading and trailing whitespace
-    line = line.strip() 
+    line = line.strip()
 
     # Parse the input from the mapper
     event, count = line.split('\t', 1)
@@ -23,4 +34,12 @@ for line in sys.stdin:
 
 # Write the results (unsorted) to stdout
 for event in eventCountArray.keys():
-    print ('%s\t%s'% ( event, eventCountArray[event] ))
+    spline = event.split('-')
+    #print ('%s\t%s\t%s'% ( curYear, event, eventCountArray[event] )
+    c=dbcon.cursor()
+    sql = str("""insert into logrows (year,month,message,cnt) values ("%s","%s","%s",%d)""" % (curYear,spline[0],spline[1],int(eventCountArray[event],)))
+    sql = "insert into logrows (year, month, message, cnt) values (%s,%s,%s,%s)"
+    c.execute(sql , (curYear,spline[0],spline[1],eventCountArray[event]))
+
+dbcon.commit()
+dbcon.close()

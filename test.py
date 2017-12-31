@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 
-# LOAD COMMON LIB 
-import sys 
+# LOAD COMMON LIB
+import sys
 sys.path.append('lib/glas')
 import glascore
+from time import strftime, localtime
 
 # 공통 라이브러리 실행
 gc = glascore.gcore()
@@ -27,3 +28,6 @@ row = cursor.fetchone()
 
 cursor.close()
 con.close()
+
+print(strftime("%Y", localtime()))
+

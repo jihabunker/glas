@@ -1,1 +1,4 @@
-export GLAS_HOME=`pwd`
+#!/bin/sh
+
+GLAS_HOME=`pwd`
+export GLAS_HOME
