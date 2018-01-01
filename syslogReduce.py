@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
-
+import re
 from time import strftime, localtime
 sys.path.append('lib/glas')
 
@@ -9,6 +9,9 @@ import glascore
 
 curYear = strftime("%Y", localtime())
 eventCountArray = {}
+
+regex_application = r'.*?\['
+regex_obj = re.compile(regex_application,re.DOTALL)
 
 gc = glascore.gcore()
 dbcon = gc.mysqlcon()
@@ -19,11 +22,7 @@ for line in sys.stdin:
     line = line.strip()
 
     # Parse the input from the mapper
-    try:
-        event, count = line.split('\t', 1)
-    except ValueError:
-        pass
-
+    event, count = line.split('\t', 1)
     # Cast count to int
     try:
         count = int(count)
@@ -38,12 +37,22 @@ for line in sys.stdin:
 
 # Write the results (unsorted) to stdout
 for event in eventCountArray.keys():
+    event = event.strip()
+    #spline[0] : month
+    #spline[1] : node
+    #spline[2] : application
+    #spline[3] : message
     spline = event.split('-')
-    #print ('%s\t%s\t%s'% ( curYear, event, eventCountArray[event] )
+    appsName = ""
+    try :
+        match = re.search(regex_application, spline[2])
+        appsName = match.group(0)
+    except AttributeError:
+        appsName = spline[2]
+
     c=dbcon.cursor()
-    sql = str("""insert into logrows (year,month,message,cnt) values ("%s","%s","%s",%d)""" % (curYear,spline[0],spline[1],int(eventCountArray[event],)))
-    sql = "insert into logrows (year, month, message, cnt) values (%s,%s,%s,%s)"
-    c.execute(sql , (curYear,spline[0],spline[1],eventCountArray[event]))
+    sql = "insert into logrows (year, month, node, application, message, cnt) values (%s,%s,%s,%s,%s,%s)"
+    c.execute(sql , (curYear,spline[0],spline[1], appsName[:-1], spline[3], eventCountArray[event]))
 
 dbcon.commit()
 dbcon.close()

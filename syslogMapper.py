@@ -2,12 +2,19 @@ import sys
 import re
 import os
 import codecs
-
+from time import localtime, strftime
 # -- syslog pattern --#
 data_pattern = r"(\w+)\s+(\d+)\s+(\d+:\d+:\d+)\s+(\w+\W*\w*)\s+(.*?\:)\s+(.*$)"
-
+# ---
+# group(1) : Month
+# group(2) : Date
+# group(3) : Time
+# group(4) : hostname
+# group(5) : Application
+# group(6) : Message
+# ---
 regex_obj = re.compile(data_pattern, re.VERBOSE)
-
+curDate = strftime("%Y%m%d", localtime())
 #filepath = os.environ["Data/*/*/*/*"]
 #filename = os.path.split(filepath)[-1]
 #file = "/var/log/messages.1"
@@ -16,6 +23,11 @@ regex_obj = re.compile(data_pattern, re.VERBOSE)
 
 #f = open (file, "r")
 #lines = f.readlines()
+sucsFile = "store/prced_"+curDate+".log"
+failFile = "store/remain_"+curDate+".log"
+
+pfHandler = open(sucsFile, "w")
+rfHandler = open(failFile, "w")
 
 #for strLineRead in lines:
 for strLineRead in sys.stdin:
@@ -30,7 +42,11 @@ for strLineRead in sys.stdin:
     if parsed_log:
         s = parsed_log.group(1)+"-"+parsed_log.group(2)+"-"+parsed_log.group(3)+"-"+parsed_log.group(4)+"-"+parsed_log.group(5)
         if parsed_log.group(6) != '':
-            print ('{0}\t{1}'.format(parsed_log.group(1)+"-"+parsed_log.group(6), "1"))
+            print ('{0}-{1}-{2}-{3}\t{4}'.format(parsed_log.group(1), parsed_log.group(4), parsed_log.group(5),parsed_log.group(6), "1"))
+            pfHandler.write(strLineRead+'\n')
     else:
         print ('%s' % (strLineRead));
-        print ("none")
+        rfHandler.write(strLineRead+'\n')
+
+pfHandler.close()
+rfHandler.close()
