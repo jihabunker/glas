@@ -23,8 +23,8 @@ curDate = strftime("%Y%m%d", localtime())
 
 #f = open (file, "r")
 #lines = f.readlines()
-sucsFile = "store/prced_"+curDate+".log"
-failFile = "store/remain_"+curDate+".log"
+sucsFile = "store/proc_sucess_"+curDate+".log"
+failFile = "store/failed"+curDate+".log"
 
 pfHandler = open(sucsFile, "w")
 rfHandler = open(failFile, "w")
@@ -44,8 +44,11 @@ for strLineRead in sys.stdin:
         if parsed_log.group(6) != '':
             print ('{0}-{1}-{2}-{3}\t{4}'.format(parsed_log.group(1), parsed_log.group(4), parsed_log.group(5),parsed_log.group(6), "1"))
             pfHandler.write(strLineRead+'\n')
+        else:
+            rfHandler.write(strLineRead+'\n')
+
     else:
-        print ('%s' % (strLineRead));
+        #print ('%s' % (strLineRead));
         rfHandler.write(strLineRead+'\n')
 
 pfHandler.close()
