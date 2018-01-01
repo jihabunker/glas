@@ -2,10 +2,9 @@
 import sys
 import re
 from time import strftime, localtime
-sys.path.append('lib/glas')
 
-# -- Glas modules --
-import glascore
+# -- Glas core class -- #
+from lib.glas.glascore import gcore
 
 curYear = strftime("%Y", localtime())
 eventCountArray = {}
@@ -13,7 +12,7 @@ eventCountArray = {}
 regex_application = r'.*?\['
 regex_obj = re.compile(regex_application,re.DOTALL)
 
-gc = glascore.gcore()
+gc = gcore()
 dbcon = gc.mysqlcon()
 
 # Input is from STDIN

@@ -1,8 +1,14 @@
+# -*- coding:utf-8 -*-
+
 import sys
 import re
 import os
 import codecs
 from time import localtime, strftime
+
+# -- Glas core class -- #
+from lib.glas.glascore import gcore
+
 # -- syslog pattern --#
 data_pattern = r"(\w+)\s+(\d+)\s+(\d+:\d+:\d+)\s+(\w+\W*\w*)\s+(.*?\:)\s+(.*$)"
 # ---
@@ -29,7 +35,10 @@ failFile = "store/failed"+curDate+".log"
 pfHandler = open(sucsFile, "w")
 rfHandler = open(failFile, "w")
 
+gc = gcore()
 #for strLineRead in lines:
+procLine = 0
+procHostname = ""
 for strLineRead in sys.stdin:
 
     # --- remove leading and trailing whitespace ---
@@ -50,6 +59,9 @@ for strLineRead in sys.stdin:
     else:
         #print ('%s' % (strLineRead));
         rfHandler.write(strLineRead+'\n')
+    procLine += 1
 
+logStr = str("Success : %d\n" % procLine)
+gc.logger.info(logStr)
 pfHandler.close()
 rfHandler.close()

@@ -2,12 +2,11 @@
 
 # LOAD COMMON LIB
 import sys
-sys.path.append('lib/glas')
-import glascore
+from lib.glas.glascore import gcore
 from time import strftime, localtime
 
 # 공통 라이브러리 실행
-gc = glascore.gcore()
+gc = gcore()
 
 # 데이타베이스 연결 예제
 con = gc.mysqlcon()
