@@ -8,7 +8,7 @@ from time import localtime, strftime
 
 # -- Glas core class -- #
 from lib.glas.glascore import gcore
-
+gc = gcore()
 # -- syslog pattern --#
 data_pattern = r"(\w+)\s+(\d+)\s+(\d+:\d+:\d+)\s+(\w+\W*\w*)\s+(.*?\:)\s+(.*$)"
 # ---
@@ -29,8 +29,9 @@ curDate = strftime("%Y%m%d", localtime())
 
 #f = open (file, "r")
 #lines = f.readlines()
-sucsFile = "store/proc_sucess_"+curDate+".log"
-failFile = "store/failed"+curDate+".log"
+
+sucsFile = gc.CFG_DATADIR+"/proc_sucess_"+curDate+".log"
+failFile = gc.CFG_DATADIR+"/failed"+curDate+".log"
 
 pfHandler = open(sucsFile, "w")
 rfHandler = open(failFile, "w")
