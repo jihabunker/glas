@@ -15,7 +15,8 @@ class gcore:
     CFG_DBUSER=0
     CFG_DBPASS=0
     CFG_LOG_FORMAT=0
-    CFG_LOG_LEVEL=0
+    CFG_LOG_LEVEL=0  
+    CFG_DATADIR=0
     fd = 0
     dbcon = 0
     logger = 0
@@ -28,7 +29,7 @@ class gcore:
         self.CFG_DBUSER = cfg.get('DB','username')
         self.CFG_DBPASS = cfg.get('DB','password')
         self.CFG_DBNAME= cfg.get('DB','dbname')
-
+        self.CFG_DATADIR=cfg.get('DATA','datadir') 
         logformat   = log.Formatter('%(asctime)s [%(levelname)s] %(filename)s:%(lineno)s  > %(message)s')
         fileHandler = log.FileHandler(cfg.get('LOGGING','log_file'))
         streamHandler = log.StreamHandler()
