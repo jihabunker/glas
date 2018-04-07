@@ -41,7 +41,7 @@ for event in eventCountArray.keys():
     #spline[1] : node
     #spline[2] : application
     #spline[3] : message
-    spline = event.split('-')
+    spline = event.split('==')
     appsName = ""
     try :
         match = re.search(regex_application, spline[2])
@@ -49,6 +49,11 @@ for event in eventCountArray.keys():
     except AttributeError:
         appsName = spline[2]
 
+    ## TODO 
+    ## check log message is error / warning/ normal  
+    ## if error / warning then this logic can check what is exact mean from stackoverflow
+    ## create new table for result from stackoverflow and connect error msg ID(logrows table)  and answer ID(answer table)
+    ## 
     c=dbcon.cursor()
     sql = "insert into logrows (year, month, node, application, message, cnt) values (%s,%s,%s,%s,%s,%s)"
     c.execute(sql , (curYear,spline[0],spline[1], appsName[:-1], spline[3], eventCountArray[event]))

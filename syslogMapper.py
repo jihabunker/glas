@@ -30,8 +30,8 @@ curDate = strftime("%Y%m%d", localtime())
 #f = open (file, "r")
 #lines = f.readlines()
 
-sucsFile = gc.CFG_DATADIR+"/proc_sucess_"+curDate+".log"
-failFile = gc.CFG_DATADIR+"/failed"+curDate+".log"
+sucsFile = gc.CFG_DATADIR+"/success_"+curDate+".log"
+failFile = gc.CFG_DATADIR+"/failed_"+curDate+".log"
 
 pfHandler = open(sucsFile, "w")
 rfHandler = open(failFile, "w")
@@ -50,9 +50,9 @@ for strLineRead in sys.stdin:
     parsed_log = regex_obj.search(strLineRead)
 
     if parsed_log:
-        s = parsed_log.group(1)+"-"+parsed_log.group(2)+"-"+parsed_log.group(3)+"-"+parsed_log.group(4)+"-"+parsed_log.group(5)
+        s = parsed_log.group(1)+"=="+parsed_log.group(2)+"=="+parsed_log.group(3)+"=="+parsed_log.group(4)+"=="+parsed_log.group(5)
         if parsed_log.group(6) != '':
-            print ('{0}-{1}-{2}-{3}\t{4}'.format(parsed_log.group(1), parsed_log.group(4), parsed_log.group(5),parsed_log.group(6), "1"))
+            print ('{0}=={1}=={2}=={3}\t{4}'.format(parsed_log.group(1), parsed_log.group(4), parsed_log.group(5),parsed_log.group(6), "1"))
             pfHandler.write(strLineRead+'\n')
         else:
             rfHandler.write(strLineRead+'\n')
