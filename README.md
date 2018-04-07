@@ -42,4 +42,4 @@ test.py는 기본환경을 테스트하기 위한 실행파일로 DB접속, 로�
 + cat data/* | python3 logMapper.py | sort | python3 logReduce.py 
 
 
-
+fds
